@@ -30,13 +30,13 @@ If you choose to use a different template:
 1. Create a page.
 1. In that page create a form with the following fields:
     1. `Username` - This is a required text field.
-    1. `Email` - This is a required email field.
+    1. `Email` - This is a required email field. This should only contain a valid email value.
     1. `First Name` - This is a required text field.
     1. `Last Name` - This is a required text field
     1. `Password` - This is a required password field.
 1. Add a help text for each field.
 1. Also add a text place holder on each field.
-1. Add a validation for the fields.
+1. Add a validation for the fields. Please refer to the field definition above.
 1. Add a submit button. Clicking this button will display an alert/notification that the user has been added.
 
 ---
@@ -168,6 +168,7 @@ If you choose to use a different template:
                 }
             ```
 
+Bonus: Implement pagination.
 
 
 # [Vue Paper Dashboard](https://cristijora.github.io/vue-paper-dashboard/)
