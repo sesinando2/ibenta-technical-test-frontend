@@ -49,6 +49,7 @@ If you choose to use a different template:
 1. Implement an edit functionality that will allow user to edit existing users from the table.
 
 Bonus: Implement some form of automated testing.
+
 ---
 
 #### Level 3:
