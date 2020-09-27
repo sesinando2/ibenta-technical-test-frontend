@@ -48,6 +48,7 @@ If you choose to use a different template:
 1. When the table is empty, display a message indicating the user that they need to add a user first.
 1. Implement an edit functionality that will allow user to edit existing users from the table.
 
+Bonus: Implement some form of automated testing.
 ---
 
 #### Level 3:
