@@ -45,7 +45,12 @@
 export default {
   computed: {
     routeName() {
-      const { name } = this.$route;
+      const { name, meta } = this.$route;
+
+      if (meta.title) {
+        return this.capitalizeFirstLetter(meta.title)
+      }
+
       return this.capitalizeFirstLetter(name);
     }
   },

@@ -3,6 +3,7 @@
     <thead>
     <slot name="columns">
       <th v-for="column in columns" :key="column">{{column}}</th>
+      <th v-if="withActions">Actions</th>
     </slot>
     </thead>
     <tbody>
@@ -14,16 +15,21 @@
           {{itemValue(item, column)}}
         </td>
       </slot>
+      <td v-if="withActions">
+        <slot name="actions" v-bind="item"></slot>
+      </td>
     </tr>
     </tbody>
   </table>
 </template>
+
 <script>
 export default {
   name: 'paper-table',
   props: {
     columns: Array,
     data: Array,
+    withActions: Boolean,
     type: {
       type: String, // striped | hover
       default: "striped"
@@ -52,5 +58,3 @@ export default {
   }
 };
 </script>
-<style>
-</style>

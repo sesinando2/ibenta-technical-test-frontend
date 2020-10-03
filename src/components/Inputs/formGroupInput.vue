@@ -1,7 +1,7 @@
 <template>
   <div class="form-group" :class="{'input-group': hasIcon}">
     <slot name="label">
-      <label v-if="label" class="control-label">
+      <label v-if="label" :for="`input-${name}`" class="control-label">
         {{label}}
       </label>
     </slot>
@@ -11,8 +11,10 @@
       </span>
     </slot>
     <input
+      :id="`input-${name}`"
       :value="value"
       @input="$emit('input',$event.target.value)"
+      :name="name"
       v-bind="$attrs"
       class="form-control"
       aria-describedby="addon-right addon-left">
@@ -22,6 +24,9 @@
         <i :class="addonRightIcon" class="input-group-text"></i>
       </span>
     </slot>
+    <small v-if="errors" class="text-danger help-block small">
+      {{ errors.join(',') }}
+    </small>
   </div>
 </template>
 <script>
@@ -30,7 +35,9 @@
     name: "fg-input",
     props: {
       label: String,
+      name: String,
       value: [String, Number],
+      errors: Array,
       addonRightIcon: String,
       addonLeftIcon: String
     },
