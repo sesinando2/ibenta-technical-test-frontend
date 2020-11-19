@@ -11,6 +11,9 @@ import Maps from "@/pages/Maps.vue";
 import Typography from "@/pages/Typography.vue";
 import TableList from "@/pages/TableList.vue";
 
+import UserList from "@/pages/UserList.vue";
+
+
 const routes = [
   {
     path: "/",
@@ -51,6 +54,11 @@ const routes = [
         path: "table-list",
         name: "table-list",
         component: TableList
+      },
+      {
+        path: "user-list",
+        name: "user-list",
+        component: UserList
       }
     ]
   },
