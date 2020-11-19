@@ -1,5 +1,9 @@
 const axios = require("axios");
 
+// module.exports.getToken = async function(){
+//     await getToken();
+// };
+
 const getToken = async() => {
     const options = {
         'method': 'POST',
@@ -8,14 +12,17 @@ const getToken = async() => {
             'accept': 'application/json'
         }
     };
-    await axios.request(options, function (error, response) { 
-    }).then(resp=>{
-        // resp.data.access_token
-        //  console.log("requestToken.js-",resp.data.access_token)
-         return resp.data.access_token
-    }).catch((error) => {
-        console.log('error ' + error);   
-    });
+    // await axios.request(options, function (error, response) { 
+    // }).then(resp=>{
+    //     // resp.data.access_token
+    //     //  console.log("requestToken.js-",resp.data.access_token)
+    //      return resp.data.access_token
+    // }).catch((error) => {
+    //     console.log('error ' + error);   
+    // });
+    let res = await axios.request(options);
+    console.log(res.data.access_token,"--")
+    return res.data.access_token
 };
 
-module.exports.getToken = getToken;
+module.exports = getToken;

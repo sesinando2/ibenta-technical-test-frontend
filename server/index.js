@@ -4,14 +4,14 @@ const morgan = require("morgan");
 const axios = require("axios");
 const Querystring = require("query-string")
 
-var asyncRequire = require('async-require')
-var tokens = require("./requestToken");
+// var asyncRequire = require('async-require')
+
 // asyncRequire('requestToken').then(function (token) {
 //     // module has been exported and can be used here
 //     token
 //     // ...
 // });
-
+var tokens = require("./requestToken")
 
 const { token } = require("morgan");
 
@@ -47,11 +47,12 @@ app.post("/adduser", (req,res) => {
 
 app.get("/oauth/tokens",(req,res) =>{
    
-    console.log(tokens)
+        console.log(tokens().access_token)
+    
 
     const options = {
         'method': 'GET',
-        'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token=',
+        'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token='+tokens,
         'headers': {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
