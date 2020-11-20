@@ -21,7 +21,7 @@ const getToken = async() => {
     //     console.log('error ' + error);   
     // });
     let res = await axios.request(options);
-    console.log(res.data.access_token,"--")
+    // console.log(res.data.access_token,"--")
     return res.data.access_token
 };
 

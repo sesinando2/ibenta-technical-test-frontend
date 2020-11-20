@@ -35,57 +35,55 @@ const BASE_URL = 'http://authentication-service.jx-ibenta-authentication-service
 const TOKEN_URL = 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/oauth/token'
 
 // Routes
-app.get("/user", (req, res) => {
-    res.send({
-     message:" Example With Vues"
-    });
-  });
 
+//add user
 app.post("/adduser", (req,res) => {
-    let route = 'adduser'
+    (async function () {
+        var accessToken = await tokens();
+        // console.log("----",accessToken);
+
+        const request = require('request');
+        const bcrypt = require('bcrypt');
+        const saltRounds = 10;
+        bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
+            const options = {
+                'method': 'POST',
+                'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token='+accessToken,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        "name":req.body.name,
+                        "firstName":req.body.firstname,
+                        "lastName":req.body.lastname,
+                        "email":req.body.email,
+                        "password":"tester"
+                    })
+            }
+            console.log("hash: ",hash);
+            console.log("name :",req.body.name);
+            request(options, function (error, response) {
+                if (error) throw new Error(error);
+                    return response;
+               
+            })
+            
+        console.log("password: ", req.body.password)
+        })
+    })();
 })
 
-app.get("/oauth/tokens",(req,res) =>{
-   
-        console.log(tokens().access_token)
-    
-
-    const options = {
-        'method': 'GET',
-        'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token='+tokens,
-        'headers': {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    };
-    const ress = axios.request(options, function (error, response) { 
-        if (error) throw new Error(error);
-        // console.log(response.body);
-    }).then(resp=>{
-        console.log(resp.data)
-        res.send({
-            body: resp.data
-        })
-    }).catch((error) => {
-        console.log('error ' + error);   
-    });
-});
-
-//route api
-
-//get all user action
-
-
-//add user action
-const addUser = (authtoken) => {
-    const request = require('request');
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
-    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
-        const options = {
-            'method': 'POST',
-            'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token='+authtoken,
+//update user
+app.put("/updateuser", (req,res) => {
+    (async function () {
+        var accessToken = await tokens();
+        const request = require('request');
+        var options = {
+            'method': 'PUT',
+            'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users/'+req.body.id+'?access_token='+accessToken,
             'headers': {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json; charset=utf-8'
             },
             body: JSON.stringify(
                 {
@@ -95,19 +93,61 @@ const addUser = (authtoken) => {
                     "email":req.body.email,
                     "password":"tester"
                 })
-        }
-        console.log("hash: ",hash)
-        console.log("name :",req.body.name)
-        request(options, function (error, response) {
+          
+          };
+          request(options, function (error, response) {
             if (error) throw new Error(error);
-            console.log(response.body);
-        })
-    });
-    console.log("password: ", req.body.password)
-}
+                return response;
+          });
+    })();
+})
 
-//request for token
+app.delete("/deleteuser",(req,res) =>{
+    (async function () {
+        var accessToken = await tokens();
+        console.log("req body-",req.body)
+        const options = {
+            'method': 'DELETE',
+            'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users/'+req.body.id+'?access_token='+accessToken,
+            'headers': {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+        const ress = axios.request(options, function (error, response) { 
+            // console.log(response.body);
+        }).then(resp=>{
+            res.send({
+                body: resp.data
+            })
+        }).catch((error) => {
+            console.log('error ' + error);   
+        });
+    })();
+});
 
+//get all user
+app.get("/oauth/tokens",(req,res) =>{
+    (async function () {
+        var accessToken = await tokens();
+    
+        const options = {
+            'method': 'GET',
+            'url': 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com/api/users?access_token='+accessToken,
+            'headers': {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+        const ress = axios.request(options, function (error, response) { 
+            // console.log(response.body);
+        }).then(resp=>{
+            res.send({
+                body: resp.data
+            })
+        }).catch((error) => {
+            console.log('error ' + error);   
+        });
+    })();
+});
 
 
 // Provide a default port 

@@ -1,11 +1,11 @@
 <template>
     <div class="row">
         <add-user></add-user>
-        <user-table :userlist="name"></user-table>
-        <p>{{allusers}}</p>    
+        <user-table type="hover" :userlist="name"></user-table>  
     </div>
 </template>
 <script>
+import axios from 'axios'
 import AddUser from '@/components/AddUser.vue'
 import UserTable from '@/components/UserTable.vue'
 export default {
@@ -20,19 +20,27 @@ export default {
             test: null
         }
     },
-    mounted(){
-        fetch('http://localhost:9000/oauth/tokens')
-        .then(response =>response.json())
-        // .then(data=>(this.allusers = data.body.content));
-        .then(data=>{
-            this.allusers = data.body.content
-            this.name = [...this.allusers]
-        });
+    created(){
+       this.getAllUser();
         
     },
     methods:{
-        thisName(){
-            this.name = this.allusers;
+        getAllUser(){
+             const self=this
+            // fetch('http://localhost:9000/oauth/tokens')
+            // .then(response =>response.json())
+            // // .then(data=>(this.allusers = data.body.content));
+            // .then(data=>{
+            //     self.allusers = data.body.content
+            //     self.name = [...self.allusers]
+            //     console.log(self.name)
+            // });
+        axios.get('http://localhost:9000/oauth/tokens')
+        .then(resp=> {
+            self.name = resp.data.body.content
+            console.log("alluser--",resp.data.body.content)
+            // console.log("params-",$route.params.id)
+        })
         }
     }
 }

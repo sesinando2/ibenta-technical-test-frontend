@@ -36,5 +36,8 @@ export default {};
     opacity: 0;
     transform: scale(1.2, 0.7);
   }
+  .pointer {
+    cursor: pointer;
+  }
 }
 </style>
