@@ -30,7 +30,8 @@
         </div>
         <div class="custom-modal-backdrop" :class="{ customFade: modalClose }"></div>
         <div id="add-user-btn" class="btn btn-round btn-info" @click="AddUserOpenAction()">Add User &nbsp; <span class="ti-plus"></span></div>
-        <p class="alert-success" :class="{showSuccess : isSuccess}">Success </p>
+        
+        <!-- <p class="alert-success" :class="{showSuccess : isSuccess}">Success </p> -->
         
     </div>
 </template>

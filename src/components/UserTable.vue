@@ -1,5 +1,6 @@
 <template>
     <div class='col-md-12'>
+        <p> click items below for more actions. </p>
          <table class="table" :class="tableClass">
              <tbody>
                  <tr>
