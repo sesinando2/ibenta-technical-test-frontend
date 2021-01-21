@@ -22,6 +22,12 @@ import "vue-notifyjs/themes/default.css";
 
 Vue.use(PaperDashboard);
 
+import ibentaApi from './api';
+Vue.prototype.$ibenta = ibentaApi;
+
+const axios = require('axios');
+Vue.prototype.$axios = axios;
+
 /* eslint-disable no-new */
 new Vue({
   router,

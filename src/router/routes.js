@@ -11,6 +11,9 @@ import Maps from "@/pages/Maps.vue";
 import Typography from "@/pages/Typography.vue";
 import TableList from "@/pages/TableList.vue";
 
+// Test
+import TestPage from "@/pages/TestPage/TestPage";
+
 const routes = [
   {
     path: "/",
@@ -51,6 +54,11 @@ const routes = [
         path: "table-list",
         name: "table-list",
         component: TableList
+      },
+      {
+        path: "test-page",
+        name: "test-page",
+        component: TestPage
       }
     ]
   },
