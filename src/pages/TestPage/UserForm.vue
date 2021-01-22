@@ -5,34 +5,65 @@
       <h5>{{ formTitleHeader }}</h5>
     </div>
     <div class="card-body">
+      <ValidationObserver v-slot="{ invalid }">
       <form @submit.prevent="formAction">
-        <div class="form-group mb-2">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" v-model="form.name" class="form-control" placeholder="Username" required>
+        <div class="row mb-3">
+          <h5 class="col-12">
+            Full Name
+          </h5>
+          <div class="form-group mb-2 col">
+            <ValidationProvider name="First Name" rules="required|alpha" v-slot="{ errors }">
+              <label for="firstname" class="form-label">First Name</label>
+              <input type="text" v-model="form.firstName" class="form-control" placeholder="First Name" required>
+              <small id="emailHelp" class="form-text text-muted">Maximum of 255 characters.</small>
+              <span class="text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </div>
+
+          <div class="form-group mb-2 col">
+            <ValidationProvider name="Last Name" rules="required|alpha" v-slot="{ errors }">
+              <label for="lastname" class="form-label">Last Name</label>
+              <input type="text" v-model="form.lastName" class="form-control" placeholder="Last Name" required>
+              <small id="emailHelp" class="form-text text-muted">Maximum of 255 characters.</small>
+              <span class="text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </div>
         </div>
 
-        <div class="form-group mb-2">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" v-model="form.email" class="form-control" placeholder="Email" required>
+        <div>
+          <h5>User Credentials</h5>
+
+          <div class="form-group mb-2">
+            <ValidationProvider name="Username" rules="required|alpha" v-slot="{ errors }">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" v-model="form.name" class="form-control" placeholder="Username" required>
+              <small id="emailHelp" class="form-text text-muted">Your username must be unique.</small>
+              <span class="text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </div>
+
+          <div class="form-group mb-2">
+            <ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" v-model="form.email" class="form-control" placeholder="Email" required>
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <span class="text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </div>
+
+          <div class="form-group mb-2">
+            <ValidationProvider name="Password" rules="required|alpha" v-slot="{ errors }">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" v-model="form.password" class="form-control" placeholder="Password" required>
+              <small id="emailHelp" class="form-text text-muted">Password must be atleast 8 characters.</small>
+              <span class="text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </div>
         </div>
 
-        <div class="form-group mb-2">
-          <label for="firstname" class="form-label">First Name</label>
-          <input type="text" v-model="form.firstName" class="form-control" placeholder="First Name" required>
-        </div>
-
-        <div class="form-group mb-2">
-          <label for="lastname" class="form-label">Last Name</label>
-          <input type="text" v-model="form.lastName" class="form-control" placeholder="Last Name" required>
-        </div>
-
-        <div class="form-group mb-2">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" v-model="form.password" class="form-control" placeholder="Password" required>
-        </div>
-
-        <button type="submit" class="btn btn-success float-right">{{ buttonText }}</button>
+        <button type="submit" class="btn btn-success float-right" :disabled="invalid">{{ buttonText }}</button>
       </form>
+      </ValidationObserver>
     </div>
   </div>
 </template>

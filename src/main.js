@@ -22,11 +22,17 @@ import "vue-notifyjs/themes/default.css";
 
 Vue.use(PaperDashboard);
 
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
+import * as rules from 'vee-validate/dist/rules';
+// install rules and localization
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
 import ibentaApi from './api';
 Vue.prototype.$ibenta = ibentaApi;
-
-const axios = require('axios');
-Vue.prototype.$axios = axios;
 
 /* eslint-disable no-new */
 new Vue({

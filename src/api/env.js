@@ -1,12 +1,5 @@
-const apiDomain = '';
-const clientId = '';
-const clientSecret = '';
+const apiDomain = 'http://authentication-service.jx-ibenta-authentication-service-pr-15.ibenta.com';
+const clientId = 'AITWD1zyBVuPWgn4ZBHSREtXJDZXL9Lt';
+const clientSecret = 'ELEGpyarKD0OWDrzfiqWqmpkOb4FSKnb';
 
-const clientData = {
-  grant_type: 'client_credentials',
-  client_id: clientId,
-  client_secret: clientSecret,
-  scope: 'read write'
-}
-
-export { apiDomain, clientId, clientSecret, clientData }
+export { apiDomain, clientId, clientSecret }

@@ -23,19 +23,19 @@
 </template>
 
 <script>
-import requestAccessToken from '@/mixins/requestAccessToken';
 import UserForm from './UserForm';
 import Notification from './Notification';
 import TableData from './Table';
+import requestAccessToken from '@/mixins/requestAccessToken';
 
 export default {
-  mixins:[requestAccessToken],
-
   components: {
     UserForm,
     Notification,
     TableData
   },
+
+  mixins:[requestAccessToken],
 
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
       editUserData:false,
       success:null,
       message:"",
-      notif:false
+      notif:false,
     }
   },
 
@@ -54,10 +54,12 @@ export default {
 
   methods: {
     fetchUsers() {
-      this.$ibenta.get('/api/users')
+      setTimeout(() => {
+        this.$ibenta.get('/api/users')
         .then(response => {
           this.users = response.data.content;
         })
+      }, 2000);
     },
     addUser(user) {
       this.users.push(user);
